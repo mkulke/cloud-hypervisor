@@ -1423,9 +1423,17 @@ impl cpu::Vcpu for MshvVcpu {
             .request_virtual_interrupt(&cfg)
             .map_err(|e| cpu::HypervisorCpuError::Nmi(e.into()))
     }
+
+    fn as_any(&self) -> &dyn Any {
+        self
+    }
 }
 
 impl MshvVcpu {
+    pub fn fd(&self) -> &VcpuFd {
+        &self.fd
+    }
+
     ///
     /// Deactivate previously used GHCB page.
     ///
@@ -1586,6 +1594,10 @@ impl MshvVm {
             .create_device(device)
             .map_err(|e| vm::HypervisorVmError::CreateDevice(e.into()))?;
         Ok(VfioDeviceFd::new_from_mshv(device_fd))
+    }
+
+    pub fn fd(&self) -> Arc<VmFd> {
+        self.fd.clone()
     }
 }
 

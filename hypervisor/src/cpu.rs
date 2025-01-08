@@ -18,6 +18,7 @@ use crate::arch::x86::{
 use crate::kvm::{TdxExitDetails, TdxExitStatus};
 use crate::CpuState;
 use crate::MpState;
+use std::any::Any;
 use thiserror::Error;
 use vm_memory::GuestAddress;
 
@@ -320,7 +321,7 @@ pub type Result<T> = anyhow::Result<T, HypervisorCpuError>;
 ///
 /// Trait to represent a generic Vcpu
 ///
-pub trait Vcpu: Send + Sync {
+pub trait Vcpu: Any + Send + Sync {
     ///
     /// Returns the vCPU general purpose registers.
     ///
@@ -524,4 +525,6 @@ pub trait Vcpu: Send + Sync {
     /// Trigger NMI interrupt
     ///
     fn nmi(&self) -> Result<()>;
+
+    fn as_any(&self) -> &dyn Any;
 }

@@ -2453,6 +2453,10 @@ impl cpu::Vcpu for KvmVcpu {
             Ok(_) => Ok(()),
         }
     }
+
+    fn as_any(&self) -> &dyn Any {
+        self
+    }
 }
 
 impl KvmVcpu {
