@@ -30,7 +30,9 @@ serde_with = { version = "3.9.0", default-features = false, features = [
   "macros",
 ] }
 thiserror = "1.0.62"
-vfio-ioctls = { git = "https://github.com/rust-vmm/vfio", branch = "main", default-features = false }
+# vfio-ioctls = { git = "https://github.com/rust-vmm/vfio", branch = "main", default-features = false }
+# pin to mshv 0.3.0 crates
+vfio-ioctls = { git = "https://github.com/rust-vmm/vfio", rev = "09c6b193d6b5a339f6a3ec3f44095046c519baaa", default-features = false }
 vm-memory = { version = "0.14.1", features = [
   "backend-atomic",
   "backend-mmap",
