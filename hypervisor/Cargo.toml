@@ -20,11 +20,16 @@ kvm-bindings = { version = "0.8.1", optional = true, features = ["serde"] }
 kvm-ioctls = { version = "0.17.0", optional = true }
 libc = "0.2.155"
 log = "0.4.22"
-mshv-bindings = { git = "https://github.com/rust-vmm/mshv", tag = "v0.3.0", features = [
+# mshv-bindings = { git = "https://github.com/rust-vmm/mshv", tag = "v0.3.0", features = [
+#   "fam-wrappers",
+#   "with-serde",
+# ], optional = true }
+mshv-bindings = { git = "https://github.com/mkulke/mshv", branch = "v0.3.0-mgns", features = [
   "fam-wrappers",
   "with-serde",
 ], optional = true }
-mshv-ioctls = { git = "https://github.com/rust-vmm/mshv", tag = "v0.3.0", optional = true }
+#mshv-ioctls = { git = "https://github.com/rust-vmm/mshv", tag = "v0.3.0", optional = true }
+mshv-ioctls = { git = "https://github.com/mkulke/mshv.git", branch = "v0.3.0-mgns", optional = true }
 serde = { version = "1.0.197", features = ["derive", "rc"] }
 serde_with = { version = "3.9.0", default-features = false, features = [
   "macros",
@@ -32,7 +37,8 @@ serde_with = { version = "3.9.0", default-features = false, features = [
 thiserror = "1.0.62"
 # vfio-ioctls = { git = "https://github.com/rust-vmm/vfio", branch = "main", default-features = false }
 # pin to mshv 0.3.0 crates
-vfio-ioctls = { git = "https://github.com/rust-vmm/vfio", rev = "09c6b193d6b5a339f6a3ec3f44095046c519baaa", default-features = false }
+#vfio-ioctls = { git = "https://github.com/rust-vmm/vfio", rev = "09c6b193d6b5a339f6a3ec3f44095046c519baaa", default-features = false }
+vfio-ioctls = { git = "https://github.com/mkulke/vfio", rev = "0646aa27672abbce50d108d4fc0d79f229fd6fa7", default-features = false }
 vm-memory = { version = "0.14.1", features = [
   "backend-atomic",
   "backend-mmap",
