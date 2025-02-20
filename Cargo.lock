@@ -993,12 +993,12 @@ dependencies = [
  "kvm-ioctls 0.17.0",
  "libc",
  "log",
- "mshv-bindings 0.3.0 (git+https://github.com/mkulke/mshv?branch=v0.3.0-mgns)",
- "mshv-ioctls 0.3.0 (git+https://github.com/mkulke/mshv?branch=v0.3.0-mgns)",
+ "mshv-bindings 0.3.0",
+ "mshv-ioctls 0.3.0",
  "serde",
  "serde_with",
  "thiserror",
- "vfio-ioctls 0.2.0 (git+https://github.com/mkulke/vfio?rev=0646aa27672abbce50d108d4fc0d79f229fd6fa7)",
+ "vfio-ioctls 0.2.0",
  "vm-memory",
  "vmm-sys-util",
 ]
@@ -1288,7 +1288,6 @@ checksum = "9bec4598fddb13cc7b528819e697852653252b760f1228b7642679bf2ff2cd07"
 [[package]]
 name = "mshv-bindings"
 version = "0.3.0"
-source = "git+https://github.com/rust-vmm/mshv?tag=v0.3.0#fda05380ea4c68b807996299d5ffb2854ca6d01d"
 dependencies = [
  "libc",
  "num_enum",
@@ -1301,7 +1300,7 @@ dependencies = [
 [[package]]
 name = "mshv-bindings"
 version = "0.3.0"
-source = "git+https://github.com/mkulke/mshv?branch=v0.3.0-mgns#5cc590d287ab662c2004c11b6b9c266c314f7f85"
+source = "git+https://github.com/rust-vmm/mshv?tag=v0.3.0#fda05380ea4c68b807996299d5ffb2854ca6d01d"
 dependencies = [
  "libc",
  "num_enum",
@@ -1314,10 +1313,9 @@ dependencies = [
 [[package]]
 name = "mshv-ioctls"
 version = "0.3.0"
-source = "git+https://github.com/rust-vmm/mshv?tag=v0.3.0#fda05380ea4c68b807996299d5ffb2854ca6d01d"
 dependencies = [
  "libc",
- "mshv-bindings 0.3.0 (git+https://github.com/rust-vmm/mshv?tag=v0.3.0)",
+ "mshv-bindings 0.3.0",
  "thiserror",
  "vmm-sys-util",
 ]
@@ -1325,10 +1323,10 @@ dependencies = [
 [[package]]
 name = "mshv-ioctls"
 version = "0.3.0"
-source = "git+https://github.com/mkulke/mshv?branch=v0.3.0-mgns#5cc590d287ab662c2004c11b6b9c266c314f7f85"
+source = "git+https://github.com/rust-vmm/mshv?tag=v0.3.0#fda05380ea4c68b807996299d5ffb2854ca6d01d"
 dependencies = [
  "libc",
- "mshv-bindings 0.3.0 (git+https://github.com/mkulke/mshv?branch=v0.3.0-mgns)",
+ "mshv-bindings 0.3.0 (git+https://github.com/rust-vmm/mshv?tag=v0.3.0)",
  "thiserror",
  "vmm-sys-util",
 ]
@@ -2284,15 +2282,31 @@ checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
 [[package]]
 name = "vfio-bindings"
 version = "0.4.0"
+
+[[package]]
+name = "vfio-bindings"
+version = "0.4.0"
 source = "git+https://github.com/NunoDasNeves/vfio?branch=nudasnev/mshv-ioctls-v0.3.0#12f4cd0378b166d1f5d199f2a4df25442a4d3fe4"
 dependencies = [
  "vmm-sys-util",
 ]
 
 [[package]]
-name = "vfio-bindings"
-version = "0.4.0"
-source = "git+https://github.com/mkulke/vfio?rev=0646aa27672abbce50d108d4fc0d79f229fd6fa7#0646aa27672abbce50d108d4fc0d79f229fd6fa7"
+name = "vfio-ioctls"
+version = "0.2.0"
+dependencies = [
+ "byteorder",
+ "kvm-bindings 0.9.1",
+ "kvm-ioctls 0.18.0",
+ "libc",
+ "log",
+ "mshv-bindings 0.3.0",
+ "mshv-ioctls 0.3.0",
+ "thiserror",
+ "vfio-bindings 0.4.0",
+ "vm-memory",
+ "vmm-sys-util",
+]
 
 [[package]]
 name = "vfio-ioctls"
@@ -2308,24 +2322,6 @@ dependencies = [
  "mshv-ioctls 0.3.0 (git+https://github.com/rust-vmm/mshv?tag=v0.3.0)",
  "thiserror",
  "vfio-bindings 0.4.0 (git+https://github.com/NunoDasNeves/vfio?branch=nudasnev/mshv-ioctls-v0.3.0)",
- "vm-memory",
- "vmm-sys-util",
-]
-
-[[package]]
-name = "vfio-ioctls"
-version = "0.2.0"
-source = "git+https://github.com/mkulke/vfio?rev=0646aa27672abbce50d108d4fc0d79f229fd6fa7#0646aa27672abbce50d108d4fc0d79f229fd6fa7"
-dependencies = [
- "byteorder",
- "kvm-bindings 0.9.1",
- "kvm-ioctls 0.18.0",
- "libc",
- "log",
- "mshv-bindings 0.3.0 (git+https://github.com/mkulke/mshv?branch=v0.3.0-mgns)",
- "mshv-ioctls 0.3.0 (git+https://github.com/mkulke/mshv?branch=v0.3.0-mgns)",
- "thiserror",
- "vfio-bindings 0.4.0 (git+https://github.com/mkulke/vfio?rev=0646aa27672abbce50d108d4fc0d79f229fd6fa7)",
  "vm-memory",
  "vmm-sys-util",
 ]
