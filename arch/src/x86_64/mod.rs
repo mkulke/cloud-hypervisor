@@ -854,7 +854,6 @@ pub fn set_cpuid_mgns(
     if let Some(t) = topology {
         update_cpuid_topology(cpuid, t.0, t.1, t.2, cpu_vendor, id);
     }
-    println!("[mgns-ch] cpuid: {:#?}", cpuid);
 }
 
 pub fn configure_vcpu(
@@ -951,25 +950,6 @@ pub fn configure_vcpu_hacked(
     vcpu.set_cpuid2(&cpuid)
         .map_err(|e| Error::SetSupportedCpusFailed(e.into()))?;
 
-    if kvm_hyperv {
-        vcpu.enable_hyperv_synic().unwrap();
-    }
-
-    regs::setup_msrs(vcpu).map_err(Error::MsrsConfiguration)?;
-    if let Some((kernel_entry_point, guest_memory)) = boot_setup {
-        regs::setup_regs(vcpu, kernel_entry_point).map_err(Error::RegsConfiguration)?;
-        regs::setup_fpu(vcpu).map_err(Error::FpuConfiguration)?;
-        regs::setup_sregs(&guest_memory.memory(), vcpu).map_err(Error::SregsConfiguration)?;
-    }
-    interrupts::set_lint(vcpu).map_err(|e| Error::LocalIntConfiguration(e.into()))?;
-    Ok(())
-}
-
-pub fn configure_vcpu_mgns(
-    vcpu: &Arc<dyn hypervisor::Vcpu>,
-    boot_setup: Option<(EntryPoint, &GuestMemoryAtomic<GuestMemoryMmap>)>,
-    kvm_hyperv: bool,
-) -> super::Result<()> {
     if kvm_hyperv {
         vcpu.enable_hyperv_synic().unwrap();
     }
