@@ -16,6 +16,7 @@ use mshv_bindings::*;
 use mshv_ioctls::{set_registers_64, InterruptRequest, Mshv, NoDatamatch, VcpuFd, VmFd, VmType};
 use std::any::Any;
 use std::collections::HashMap;
+use std::os::fd::FromRawFd;
 use std::sync::{Arc, RwLock};
 use vfio_ioctls::VfioDeviceFd;
 use vm::DataMatch;
@@ -1602,6 +1603,28 @@ pub struct MshvVm {
 }
 
 impl MshvVm {
+    /// Temp
+    pub fn new_vcpu_mgns(
+        &self,
+        raw_vcpu_fd: i32,
+        id: u8,
+        vm_ops: Option<Arc<dyn VmOps>>,
+    ) -> MshvVcpu {
+        let vcpu_file = unsafe { std::fs::File::from_raw_fd(raw_vcpu_fd) };
+        let fd = VcpuFd::new_mgns(id as u32, vcpu_file);
+
+        let msrs = self.msrs.clone();
+        let vm_fd = self.fd.clone();
+        MshvVcpu {
+            fd,
+            vp_index: id,
+            cpuid: Vec::new(),
+            msrs,
+            vm_ops,
+            vm_fd,
+        }
+    }
+
     ///
     /// Creates an in-kernel device.
     ///
