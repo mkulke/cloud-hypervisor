@@ -36,6 +36,18 @@ pub enum CpuMode {
     Long,
 }
 
+pub fn print_decoded_insn_mgns(insn: &Instruction, insn_stream: &[u8]) {
+    println!(
+        "Decoded instruction: opcode={:#x} {:#x} {:#x} {:#x}, len={}, cmd={:?}",
+        insn_stream[0],
+        insn_stream[1],
+        insn_stream[2],
+        insn_stream[3],
+        insn.len(),
+        insn.code()
+    );
+}
+
 /// CpuStateManager manages an x86 CPU state.
 ///
 /// Instruction emulation handlers get a mutable reference to
